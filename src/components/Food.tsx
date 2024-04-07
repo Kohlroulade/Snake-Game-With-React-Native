@@ -1,14 +1,17 @@
-import { StyleSheet, Text, View } from "react-native";
-import { Coordinate } from "../types/types";
+import { StyleSheet, Image, ImageSourcePropType } from "react-native";
 
-function getRandomFruitEmoji() {
-  const fruitEmojis = ["🍎", "🍊", "🍋", "🍇", "🍉", "🍓", "🍑", "🍍"];
-  const randomIndex = Math.floor(Math.random() * fruitEmojis.length);
-  return fruitEmojis[randomIndex];
+export interface FoodProps {
+  x: number,
+  y: number,
+  imageSource: ImageSourcePropType
 }
-
-export default function Food({ x, y }: Coordinate): JSX.Element {
-  return <Text style={[{ top: y * 10, left: x * 10 }, styles.food]}>🍎</Text>;
+export default function Food(props: FoodProps): JSX.Element {
+  return (
+    <Image 
+      source={props.imageSource} 
+      style={[{ top: props.y * 10, left: props.x * 10 }, styles.food]}>
+    </Image>
+  )
 }
 
 const styles = StyleSheet.create({

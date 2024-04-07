@@ -12,27 +12,39 @@ import Controls from "./Controls";
 import GameField from "./GameField";
 import { SafeAreaView, StyleSheet } from "react-native";
 
-let GAME_BOUNDS: { xMin: number, xMax: number , yMin: number, yMax: number };
+
+const audio = new Audio('./../../assets/jamjam.mp3');
+
+// set on onLayout of GameField-child-component
+let GAME_BOUNDS: { xMin: number, xMax: number , yMin: number, yMax: number }; 
 const SNAKE_INITIAL_POSITION = [{ x: 5, y: 5 }, { x: 4, y: 5 }, { x: 4, y: 5 }];
 const FOOD_INITIAL_POSITION = { x: 5, y: 20 };
 const MOVE_INTERVAL = 50;
 const SCORE_INCREMENT = 10;
 
-const Game: FC<PropsWithChildren> = () => {
+interface GameProps {
+  type: string;
+}
+
+const Game: FC<GameProps> = (props) => {
   const [direction, setDirection] = useState<Direction>(Direction.Right);
   const [snake, setSnake] = useState<Coordinate[]>(SNAKE_INITIAL_POSITION);
   const [food, setFood] = useState<Coordinate>(FOOD_INITIAL_POSITION);
   const [score, setScore] = useState<number>(0);
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
   const [isPaused, setIsPaused] = useState<boolean>(false);
+  const imageSource = `./../../assets/${ props.type }.png`;
   
   useEffect(() => {
+    audio.play();
       if (!isGameOver) {
         const intervalId = setInterval(() => {
             !isPaused && moveSnake();
           }, 
           MOVE_INTERVAL);
-        return () => clearInterval(intervalId);
+        return () => {
+          clearInterval(intervalId);
+        };
       }
   }, [snake, isGameOver, isPaused]);
 
@@ -92,13 +104,13 @@ const Game: FC<PropsWithChildren> = () => {
           reloadGame={reloadGame}
           pauseGame={pauseGame}
           isPaused={isPaused}>
-          <Score score={score} />
+          <Score score={score} imageSource={{uri: imageSource}}/>
         </Header>
         <GameField onLayout={e => {
             const l = e.nativeEvent.layout; 
             GAME_BOUNDS = {xMin: 0, xMax: l.width / 10 - 3, yMin: 0, yMax: l.height / 10 - 3};
           }} 
-          SnakeProps={snake} FoodProps={food} style={styles.boundaries}/>
+          SnakeProps={snake} Food={{x: food.x, y: food.y, imageSource: {uri: imageSource}}} style={styles.boundaries}/>
         <Footer>
           <Controls 
             onDownPress={ () => setDirection(Direction.Down) } 
@@ -114,7 +126,6 @@ const Game: FC<PropsWithChildren> = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "column",
     backgroundColor: Colors.primary
   },
   boundaries: {
