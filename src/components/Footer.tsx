@@ -16,8 +16,7 @@ const styles = {
     borderBottomRightRadius: 30,
     borderTopWidth: 0,
     padding: 15
-  },
-  
+  }  
 };
 
 export default Footer;

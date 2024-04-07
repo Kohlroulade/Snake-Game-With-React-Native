@@ -2,11 +2,11 @@ import { TouchableOpacity, StyleSheet, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "../styles/colors";
 import { FontAwesome } from "@expo/vector-icons";
+import { PropsWithChildren } from "react";
 
-interface HeaderProps {
+interface HeaderProps extends PropsWithChildren {
   reloadGame: () => void;
   pauseGame: () => void;
-  children: JSX.Element;
   isPaused: boolean;
 }
 
