@@ -129,9 +129,9 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary
   },
   boundaries: {
-    flex: 9,
+    flex: 5,
     borderColor: Colors.primary,
-    borderWidth: 12,
+    borderWidth: 10,
     backgroundColor: Colors.background
   },
 });
