@@ -3,7 +3,7 @@ import { Button, GestureResponderEvent, View } from "react-native";
 import { Platform } from "react-native";
 
 const styles = {
-  row: { flexDirection: "row" },
+  row: { flex: 1, flexDirection: "row" },
   col: { flex: 1 }
 } as const;
 
@@ -49,7 +49,7 @@ const Controls: FC<ControlsProps> = (props) => {
   });
   
   return (
-      <View>
+      <View style={{ flex: 1 }}>
         <Row>
           <Column />
           <Column><Button title="up" onPress={ props.onUpPress }></Button></Column>
@@ -69,7 +69,3 @@ const Controls: FC<ControlsProps> = (props) => {
     );
 }
 export default Controls;
-
-function async(): React.EffectCallback {
-  throw new Error("Function not implemented.");
-}

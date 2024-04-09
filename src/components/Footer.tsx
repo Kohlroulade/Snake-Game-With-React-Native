@@ -8,14 +8,13 @@ const Footer: FC<PropsWithChildren> = (props) => {
 
 const styles = {  
   container: { 
-    flex: 2,
     borderColor: Colors.primary,
-    borderWidth: 12,
+    borderWidth: 10,
     backgroundColor: Colors.background,
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
     borderTopWidth: 0,
-    padding: 15
+    padding: 10
   }  
 };
 
