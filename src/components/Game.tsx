@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Colors } from "../styles/colors";
 import { Direction, Coordinate } from "../types/types";
 import { checkEatsFood } from "../utils/checkEatsFood";
@@ -11,7 +11,6 @@ import Score from "./Score";
 import Controls from "./Controls";
 import GameField from "./GameField";
 import { SafeAreaView, StyleSheet } from "react-native";
-
 
 const audio = new Audio('./../../assets/jamjam.mp3');
 
