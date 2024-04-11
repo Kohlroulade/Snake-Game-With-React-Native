@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Colors } from "../styles/colors";
 import { Direction, Coordinate } from "../types/types";
 import { checkEatsFood } from "../utils/checkEatsFood";
@@ -11,7 +11,6 @@ import Score from "./Score";
 import Controls from "./Controls";
 import GameField from "./GameField";
 import { SafeAreaView, StyleSheet } from "react-native";
-
 
 const audio = new Audio('./../../assets/jamjam.mp3');
 
@@ -34,6 +33,7 @@ const Game: FC<GameProps> = (props) => {
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const imageSource = `./../../assets/${ props.type }.png`;
+  const headImage = `./../../assets/${ props.type === "Carsten" ? "Sarah" : "Carsten" }.png`;
   
   useEffect(() => {
     audio.play();
@@ -110,7 +110,9 @@ const Game: FC<GameProps> = (props) => {
             const l = e.nativeEvent.layout; 
             GAME_BOUNDS = {xMin: 0, xMax: l.width / 10 - 3, yMin: 0, yMax: l.height / 10 - 3};
           }} 
-          SnakeProps={snake} Food={{x: food.x, y: food.y, imageSource: {uri: imageSource}}} style={styles.boundaries}/>
+          SnakeProps={{ coords: snake, headImage: { uri: headImage }}}
+          Food={{ x: food.x, y: food.y, imageSource: { uri: imageSource }}} 
+          style={ styles.boundaries }/>
         <Footer>
           <Controls 
             onDownPress={ () => setDirection(Direction.Down) } 
