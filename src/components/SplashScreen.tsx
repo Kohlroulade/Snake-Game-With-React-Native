@@ -17,6 +17,12 @@ const SplashScreen: FC<SpashScreenProps> = (props) => {
                     <Image source={{ uri: "./../../assets/Carsten.png" }} style={ styles.image} />
                 </TouchableOpacity>
             </View>
+            <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 18 }}>Steuerung:</Text>
+            <Text style= { styles.text }>
+                {` Auf dem Smartphone: mit den vier Buttons im unteren Bildschirmbereich.
+                Auf dem PC/Laptop u.ä. zusätzlich mit den Pfeiltasten sowie den Tasten WSAD.
+                Zudem kann auf dem PC die Leertaste verwendet werden, um das Spiel zu pausieren. `}
+            </Text>
         </View>
     );
 }
@@ -41,7 +47,8 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 14,
         textAlign: "center",
-        marginBottom: 10
+        marginBottom: 10,
+        lineHeight: 20
     },
     image: { 
         width : 100, 
